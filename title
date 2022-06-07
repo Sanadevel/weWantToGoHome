@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <conio.h>
+#include <windows.h>
+//초기화
+void cursor()
+{
+	CONSOLE_CURSOR_INFO cursorInfo = { 0, };//깜박거리는 커서 제거
+	cursorInfo.bVisible = 0;
+	cursorInfo.dwSize = 1;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+}
+void color(unsigned short color)
+{
+	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hCon, color);
+}
+void gotoxy(float x, int y)
+{
+	COORD pos = { x * 2, y };//커서이동
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+int main() {
+	cursor();
+	char input;
+	int i;
+	int a = 0;
+	gotoxy(25, 10);
+	    printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		gotoxy(25, 11);
+		printf("■                                                                    ■");
+		gotoxy(25, 12);
+		printf("■                                                                    ■");
+		gotoxy(25, 13);
+		printf("■                                                                    ■");
+		gotoxy(25, 14);
+		printf("■                                                                    ■");
+		gotoxy(25, 15);
+		printf("■                                                                    ■");
+		gotoxy(25, 16);
+		printf("■                                                                    ■");
+		gotoxy(25, 17);
+		printf("■                                                                    ■");
+		gotoxy(25, 18);
+		printf("■           (A)시작          (B)노래 선택         (C)기록 보기       ■");
+		gotoxy(25, 19);
+		printf("■                                                                    ■");
+		gotoxy(25, 20);
+		printf("■                                                                    ■");
+		gotoxy(25, 21);
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		gotoxy(25, 22);
+
+		for (i = 0;; i++)
+		{
+			if (i == 15)
+				i = 0;
+			gotoxy(37.5, 15);
+			color(i);
+			printf("집에 보내조의 리듬 게임");
+			Sleep(100);
+			gotoxy(37.5, 15);
+			printf("                       ");
+			if (_kbhit())
+			{
+				input = _getch();
+				switch (input) {
+				case 'A':
+				case 'a':
+					printf("시작");
+					break;
+				case 'B':
+				case 'b':
+					printf("노래");
+					break;
+				case 'C':
+				case 'c':
+					printf("기록");
+					break;
+				}
+			}
+		}
+}
